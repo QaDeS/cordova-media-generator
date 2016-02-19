@@ -17,7 +17,7 @@
   }
 
   var output = {
-    generate: function(url, width, height, devicePixelRatio, savePath, saveFilename) {
+    generate: function(url, width, height, devicePixelRatio, savePath, saveFilename, delay) {
       var deferred = q.defer();
 
       if (!url || !width || !height || !savePath || !saveFilename) {
@@ -48,20 +48,22 @@
               }
               mkdirp(__dirname + savePath, function(err) {
                 if (err) deferred.reject(err);
-                page.render(savePath + "/" + saveFilename, {
-                  format: 'jpg',
-                  quality: '60'
-                }, function(err) {
-                  console.log("Generated screenshot", url, savePath, saveFilename);
-                  if (err) {
-                    deferred.reject(err);
-                  } else {
-                    deferred.resolve({
-                      success: true
-                    });
-                  }
-                  page.close();
-                });
+                setTimeout(function(){
+                  page.render(savePath + "/" + saveFilename, {
+                    format: 'jpg',
+                    quality: '60'
+                  }, function(err) {
+                    console.log("Generated screenshot", url, savePath, saveFilename);
+                    if (err) {
+                      deferred.reject(err);
+                    } else {
+                      deferred.resolve({
+                        success: true
+                      });
+                    }
+                    page.close();
+                  });
+                }, delay);
               });
             });
           });
@@ -74,7 +76,7 @@
       var deferred = q.defer();
       async.eachLimit(output.screenshots, 1, function(item, cb1) {
         async.eachLimit(output.pages, 1, function(page, cb2) {
-          output.generate(page.url, item.width, item.height, item.devicePixelRatio, item.savePath, item.filename + page.name + ".jpg")
+          output.generate(page.url, item.width, item.height, item.devicePixelRatio, item.savePath, item.filename + page.name + ".jpg", page.delay || 0)
             .then(function(result) {
               cb2();
             })
