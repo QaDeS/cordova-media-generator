@@ -6,7 +6,7 @@ describe('main app', function () {
   this.timeout(5000);
   describe('__resize', function () {
     it('should not error out', function (done) {
-      mediaGen.__resize(10, 10, "#fff", "images/icon.png", "../media/output.png", "./")
+      mediaGen.__resize(10, 10, null, "images/icon.png", "../media/output.png", "./")
         .then(function(result){
           expect(result).to.exist;
           done();

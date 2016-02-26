@@ -55,10 +55,13 @@ function resize(width, height, bgColour, imagePath, outputFilename, outputPath) 
       var y = (height / 2) - (imageHeight / 2);
 
       mkdirp(path.join(process.cwd(), "platforms", outputPath), function(err) {
-        image.background(bgColour)
-          .gravity('Center')
-          .extent(width, height)
-          .write(path.join(process.cwd(), "platforms", outputPath, outputFilename), function(error) {
+        var img = image.gravity('Center');
+        if(bgColour) {
+          img = img.background("#" + bgColour).extent(width, height);
+        } else {
+           img.resize(width, height);
+        }
+        img.write(path.join(process.cwd(), "platforms", outputPath, outputFilename), function(error) {
             if (error) {
               console.error("Write file error", error);
               deferred.reject(error);
@@ -525,13 +528,13 @@ function generate() {
         width: 1024,
         height: 500,
         path: "../" + mediaPath + "/android/store",
-        filename: "1024x500.png",
+        filename: "1024x500.jpg",
         source: process.argv[2] || config.splash || config.image
       }, {
         width: 180,
         height: 120,
         path: "../" + mediaPath + "/android/store",
-        filename: "180x120.png",
+        filename: "180x120.jpg",
         source: process.argv[2] || config.splash || config.image
       },
 
@@ -598,7 +601,9 @@ function generate() {
           }
         }
         if (sourceImage) {
-          resize(image.width, image.height, '#' + background, sourceImage, image.filename, image.path);
+          // temporary fix to make transparent icons possible
+          var bg = (image.path.indexOf("android/") != -1 && image.filename.indexOf(".png") != -1) ? undefined : background;
+          resize(image.width, image.height, bg, sourceImage, image.filename, image.path);
         }
       });
       deferred.resolve();
