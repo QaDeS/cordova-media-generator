@@ -21,6 +21,12 @@
     },
     "promo": "=2560x1600"
   },
+  "getjar": {
+    "icon": [ "32", "64", "128" ],
+    "screenshot": {
+      "device": [ "800x480" ]
+    }
+  },
   "apple": {
     "icon": [ "1024" ],
     "screenshot": {

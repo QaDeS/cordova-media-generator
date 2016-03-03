@@ -27,7 +27,7 @@
         return deferred.promise;
       }
       if (!ph) {
-        phantom.create(function(newPh) {
+        phantom.create().then(function(newPh) {
           ph = newPh;
           doGen();
         })
@@ -36,34 +36,38 @@
       }
 
       function doGen() {
-        ph.createPage(function(page) {
-          page.setViewportSize(width, height, function() {
-            page.open(url, function() {
-              if (devicePixelRatio && devicePixelRatio !== 1) {
-                evaluate(page, function(devicePixelRatio) {
-                  document.body.style.webkitTransform = "scale(" + devicePixelRatio + ")";
-                  document.body.style.webkitTransformOrigin = "0% 0%";
-                  document.body.style.width = (100 / devicePixelRatio) + "%";
-                }, devicePixelRatio);
-              }
-              mkdirp(__dirname + savePath, function(err) {
-                if (err) deferred.reject(err);
-                setTimeout(function(){
-                  page.render(savePath + "/" + saveFilename, {
-                    format: 'jpg',
-                    quality: '60'
-                  }, function(err) {
-                    console.log("Generated screenshot", url, savePath, saveFilename);
-                    if (err) {
-                      deferred.reject(err);
-                    } else {
-                      deferred.resolve({
-                        success: true
-                      });
-                    }
-                    page.close();
-                  });
-                }, delay);
+        ph.createPage().then(function(page) {
+          page.property("viewportSize", {width: width, height: height}).then(function() {
+            page.property("clipRect", {width: width, height: height}).then(function() {
+              page.open(url).then(function() {
+                  if (devicePixelRatio && devicePixelRatio !== 1) {
+                  evaluate(page, function(devicePixelRatio) {
+                    document.body.style.webkitTransform = "scale(" + devicePixelRatio + ")";
+                    document.body.style.webkitTransformOrigin = "0% 0%";
+                    document.body.style.width = (100 / devicePixelRatio) + "%";
+                  }, devicePixelRatio);
+                }
+                mkdirp(__dirname + savePath, function(err) {
+                  if (err) deferred.reject(err);
+                  setTimeout(function(){
+                    page.render(savePath + "/" + saveFilename, {
+                      format: 'jpg',
+                      quality: '60'
+                    }).then(function(success) {
+                      err = false;
+                      console.log(arguments);
+                      console.log("Generated screenshot", url, savePath, saveFilename);
+                      if (err) {
+                        deferred.reject(err);
+                      } else {
+                        deferred.resolve({
+                          success: true
+                        });
+                      }
+                      page.close();
+                    });
+                  }, delay);
+                });
               });
             });
           });
@@ -127,13 +131,13 @@
       savePath: mediaPath + '/android/screenshots/7in'
     }, {
       filename: "android-4in-1280x720-land",
-      width: 1920,
-      height: 1080,
+      width: 1280,
+      height: 720,
       savePath: mediaPath + '/android/screenshots/4in'
     }, {
       filename: "android-4in-1280x720-port",
-      width: 1080,
-      height: 1920,
+      width: 720,
+      height: 1280,
       savePath: mediaPath + '/android/screenshots/4in'
     }, {
       filename: "ipad-1024x768-land",
