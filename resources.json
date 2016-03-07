@@ -1,0 +1,80 @@
+{
+  "android": {
+    "icon": {
+      "paths": [
+        "android/res/drawable{name}/icon",
+        "android/bin/res/drawable{name}/icon",
+        "android/ant-build/res/drawable{name}/icon"
+      ],
+      "images": {
+        "": "96",
+        "-hdpi": "72",
+        "-ldpi": "36",
+        "-mdpi": "48",
+        "-xhdpi": "96",
+        "-xxhdpi": "144"
+      }
+    },
+    "splash": {
+      "paths": [
+        "android/res/drawable-{name}/screen",
+        "android/bin/res/drawable-{name}/screen",
+        "android/ant-build/res/drawable-{name}/screen"
+      ],
+      "images": {
+        "land-hdpi": "800x480",
+        "land-ldpi": "320x200",
+        "land-mdpi": "480x320",
+        "land-xdpi": "1280x720",
+        "port-hdpi": "480x800",
+        "port-ldpi": "200x320",
+        "port-mdpi": "320x480",
+        "port-xdpi": "720x1280"
+      }
+    }
+  },
+  
+  "ios": {
+    "format": "png",
+    "icon": {
+      "paths": ["ios/{iOSProjectName}/Resources/icons/icon{name}"],
+      "images": {
+        "-60@3x": "60@3",
+        "-60@2x": "60@2",
+        "-60": "60",
+        "-40": "40",
+        "-40@2x": "40@2",
+        "-40@3x": "40@3",
+        "-50": "50",
+        "-50@2x": "50@2",
+        "-72@2x": "72@2",
+        "-72": "72",
+        "-76@2x": "76@2",
+        "-76": "76",
+        "-120": "120",
+        "-small": "29",
+        "-small@2x": "58",
+        "-small@3x": "87",
+        "": "57",
+        "@2x": "114"
+      }
+    },
+    "splash": {
+      "paths": ["ios/{iOSProjectName}/Resources/splash/Default{name}"],
+      "images": {
+        "-568h@2x~iphone": "640x1136",
+        "-Landscape@2x~ipad": "2048x1536",
+        "-Landscape~ipad": "1024x768",
+        "-Portrait@2x~ipad": "1536x2048",
+        "-Portrait~ipad": "768x1024",
+        "@2x~iphone": "640x960",
+        "~iphone": "320x480",
+        "-667h": "750x1344",
+        "-736h": "1242x2208",
+        "-Landscape-736h": "2208x1242"
+      }
+    }
+  }
+}
+
+
