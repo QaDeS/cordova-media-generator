@@ -352,6 +352,12 @@ function generate() {
         path: "android/res/drawable-xhdpi",
         filename: "icon.png",
         source: process.argv[2] || config.icon || config.image
+      }, {
+        width: 144,
+        height: 144,
+        path: "android/res/drawable-xxhdpi",
+        filename: "icon.png",
+        source: process.argv[2] || config.icon || config.image
       },
 
 
@@ -432,6 +438,12 @@ function generate() {
         width: 96,
         height: 96,
         path: "android/bin/res/drawable-xhdpi",
+        filename: "icon.png",
+        source: process.argv[2] || config.icon || config.image
+      }, {
+        width: 144,
+        height: 144,
+        path: "android/bin/res/drawable-xxhdpi",
         filename: "icon.png",
         source: process.argv[2] || config.icon || config.image
       },
@@ -515,6 +527,12 @@ function generate() {
         path: "android/ant-build/res/drawable-xhdpi",
         filename: "icon.png",
         source: process.argv[2] || config.icon || config.image
+      }, {
+        width: 144,
+        height: 144,
+        path: "android/ant-build/res/drawable-xxhdpi",
+        filename: "icon.png",
+        source: process.argv[2] || config.icon || config.image
       },
 
       //Android Store Icons
@@ -523,6 +541,30 @@ function generate() {
         height: 512,
         path: "../" + mediaPath + "/android/store",
         filename: "512.png",
+        source: process.argv[2] || config.icon || config.image
+      }, {
+        width: 128,
+        height: 128,
+        path: "../" + mediaPath + "/android/store",
+        filename: "128.png",
+        source: process.argv[2] || config.icon || config.image
+      }, {
+        width: 114,
+        height: 114,
+        path: "../" + mediaPath + "/android/store",
+        filename: "114.png",
+        source: process.argv[2] || config.icon || config.image
+      }, {
+        width: 64,
+        height: 64,
+        path: "../" + mediaPath + "/android/store",
+        filename: "64.png",
+        source: process.argv[2] || config.icon || config.image
+      }, {
+        width: 32,
+        height: 32,
+        path: "../" + mediaPath + "/android/store",
+        filename: "32.png",
         source: process.argv[2] || config.icon || config.image
       }, {
         width: 1024,
