@@ -140,6 +140,16 @@
       height: 1280,
       savePath: mediaPath + '/android/screenshots/4in'
     }, {
+      filename: "android-4in-800x480-land",
+      width: 800,
+      height: 480,
+      savePath: mediaPath + '/android/screenshots/getjar'
+    }, {
+      filename: "android-4in-800x480-port",
+      width: 480,
+      height: 800,
+      savePath: mediaPath + '/android/screenshots/getjar'
+    }, {
       filename: "ipad-1024x768-land",
       width: 1024,
       height: 768,
